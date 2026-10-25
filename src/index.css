@@ -1,0 +1,125 @@
+@import 'tailwindcss';
+
+/* ---------- Design tokens ---------- */
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+  --color-ink-950: #07070d;
+  --color-ink-900: #0d0d17;
+  --color-ink-800: #151524;
+  --color-accent: #8b5cf6;
+  --color-accent-2: #22d3ee;
+  --color-done: #34d399;
+  --color-flame: #fb923c;
+}
+
+/* ---------- Native-app feel ---------- */
+html {
+  /* Kills double-tap-to-zoom while keeping scroll + pinch on images disabled via viewport meta */
+  touch-action: manipulation;
+  -webkit-text-size-adjust: 100%;
+  background: var(--color-ink-950);
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--color-ink-950);
+  color: #e7e7f0;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  overscroll-behavior-y: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Inputs must stay selectable and ≥16px so iOS doesn't zoom on focus */
+input,
+textarea,
+select {
+  user-select: text;
+  -webkit-user-select: text;
+  font-size: 16px;
+}
+
+/* Hide scrollbars everywhere, keep scrolling */
+* {
+  scrollbar-width: none;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* ---------- Safe areas (notch / home indicator) ---------- */
+.pt-safe {
+  padding-top: max(env(safe-area-inset-top), 12px);
+}
+.pb-safe {
+  padding-bottom: max(env(safe-area-inset-bottom), 16px);
+}
+.px-safe {
+  padding-left: max(env(safe-area-inset-left), 16px);
+  padding-right: max(env(safe-area-inset-right), 16px);
+}
+.bottom-safe {
+  bottom: max(env(safe-area-inset-bottom), 16px);
+}
+
+/* ---------- Glassmorphism ---------- */
+.glass {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+.glass-strong {
+  background: linear-gradient(180deg, rgba(28, 28, 44, 0.92), rgba(16, 16, 28, 0.94));
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+}
+
+/* Ambient background glow — on a fixed layer (iOS ignores background-attachment: fixed) */
+.app-bg {
+  position: relative;
+  isolation: isolate;
+}
+.app-bg::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60rem 40rem at 110% -10%, rgba(139, 92, 246, 0.22), transparent 60%),
+    radial-gradient(50rem 35rem at -20% 30%, rgba(34, 211, 238, 0.12), transparent 60%),
+    radial-gradient(40rem 30rem at 50% 120%, rgba(236, 72, 153, 0.12), transparent 60%),
+    var(--color-ink-950);
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #c4b5fd, #67e8f9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Drag handles must not let the browser scroll while dragging */
+.drag-handle {
+  touch-action: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
