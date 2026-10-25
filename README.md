@@ -14,9 +14,7 @@ npm run preview   # serve dist/ with the service worker active
 
 ## Put it on your phone
 
-Deploy `dist/` to any HTTPS static host, then add it to your home screen:
-
-- **Hosts:** Netlify Drop, Vercel, GitHub Pages or Cloudflare Pages. The build uses relative paths, so sub-folders work.
+- **Host URL:** daily-game-command-center.vercel.app
 - **iPhone:** in Safari, tap Share → **Add to Home Screen**.
 - **Android:** in Chrome, tap ⋮ → **Install app**, or use Settings → Install app.
 
